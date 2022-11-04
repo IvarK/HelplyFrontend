@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>Made by Vertics gang lmao modern technologies go brrrr</p>
 	</footer>
 </div>
 
@@ -28,7 +28,7 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 64rem;
+		max-width: 50%;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}

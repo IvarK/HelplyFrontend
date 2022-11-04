@@ -1,49 +1,51 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+	import aalto from '$lib/images/aalto.png';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
+		<a href="/">
+			<span class="logo pink">helply.io</span>
+			<div class="divider">x</div>
+			<img src={aalto} alt="Aalto">
 		</a>
 	</div>
-
 	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
 		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Mutsis</a>
+			<li>
+				<a href="/">How does it work</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">pillu</a>
+			<li>
+				<a href="/#">about</a>
+			</li>
+			<li>
+				<a href="/#">pricing</a>
 			</li>
 		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
 
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div>
+		<button class="cto">I'm worried about a friend</button>
+	</nav>
 </header>
 
 <style>
 	header {
 		display: flex;
 		justify-content: space-between;
+		width: 50%;
+		margin: auto;
+		margin-top: 20px;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
+	.corner .logo {
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+
+	.corner .divider {
+		color: black;
+		margin: 0 8px;
 	}
 
 	.corner a {
@@ -63,17 +65,6 @@
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
 	}
 
 	ul {
@@ -94,33 +85,25 @@
 		height: 100%;
 	}
 
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
 	nav a {
 		display: flex;
 		height: 100%;
 		align-items: center;
-		padding: 0 0.5rem;
+		padding: 0 1rem;
 		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		text-decoration: none;
 		transition: color 0.2s linear;
+		color: var(--color-theme-1);
 	}
 
 	a:hover {
 		color: var(--color-theme-1);
+	}
+
+	.cto {
+		margin-left: 1em;
 	}
 </style>

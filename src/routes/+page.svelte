@@ -1,28 +1,28 @@
 <script>
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import hands from '$lib/images/hands.png';
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Helply - Home</title>
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
+	<div class="hero">
+		<div class="hero-text">
+			<h1>Are you worried about your friend?</h1>
+			<div class="divider"/>
+			<p>
+				Help a friend and send a call for help. We will reach out
+				to your and ensure he gets the professional help he needs
+				in order to turn his life around.
+			</p>
+			<button class="cto">I'm worried about a friend</button>
+		</div>
+		<div class="hero-image">
+			<img src={hands} alt="Hero">
+			<div class="img-background"/>
+		</div>
+	</div>
 </section>
 
 <style>
@@ -34,23 +34,48 @@
 		flex: 0.6;
 	}
 
+	.hero {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: auto;
+	}
+
+	.divider {
+		width: 180px;
+		height: 2px;
+		background-color: var(--color-theme-1);
+		margin: 20px 0;
+	}
+
 	h1 {
-		width: 100%;
+		text-align: start;
+		font-weight: bold;
+		font-size: 4em;
 	}
 
-	.welcome {
-		display: block;
+	p {
+		width: 430px;
+	}
+
+	.hero-image {
 		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+		margin-left: 100px;
 	}
 
-	.welcome img {
+	.hero-image img {
+		position: relative;
+		z-index: 1;
+	}
+
+	.img-background {
 		position: absolute;
+		top: 15px;
+		left: 15px;
 		width: 100%;
 		height: 100%;
-		top: 0;
-		display: block;
+		background-color: var(--color-theme-1);
+		border-radius: var(--border-radius);
+		z-index: 0;
 	}
 </style>
