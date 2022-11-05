@@ -8,8 +8,6 @@
 
 	export let visibleColumns: TColumn[];
 
-	const currentUser = 'Hackathon Demo';
-
 	onMount(async () => {
 		const tickets = await Api.getTickets();
 

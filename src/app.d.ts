@@ -12,6 +12,7 @@ interface INote {
 	author: string;
 	text: string;
 	created_at: string;
+  ticket_id: number;
 }
 interface ITicket {
   id: number;
@@ -29,6 +30,8 @@ interface ITicket {
 }
 
 type ITicketBody = Omit<ITicket, 'id' | 'notes'>;
+
+type INoteBody = Omit<INote, 'id' | 'created_at' | 'ticket_id'>;
 
 
 type TColumn = "New" | "Mine" | "Assigned to others" | "Completed";

@@ -1,31 +1,20 @@
 <script lang="ts">
 	import Api from "$lib/api";
-	import { modalTicket, storeTickets, ticketColumns } from "$lib/stores";
+	import { modalNotes, modalTicket, storeTickets, ticketColumns } from "$lib/stores";
 
 
 	let input = '';
 
 	export let ticket: ITicket;
+	export let notes: INote[];
 
 	async function handleSubmit() {
-		const notes = ticket.notes
-		const topId = notes.length > 0 ? notes[notes.length - 1].id + 1 : 1;
-		notes.push({
+		const newNote = await Api.addNote(ticket.id, {
 			text: input, 
-			author: 'Hackathon Demo',
-			created_at: new Date().toISOString(), 
-			id: topId
-		});
-		const newTicket = {...ticket, notes }
-		const res = await Api.updateTicket(newTicket);
-		modalTicket.set(newTicket);
-
-		storeTickets.update((tickets) => {
-			const index = tickets.findIndex((t) => t.id === newTicket.id);
-			tickets[index] = newTicket;
-			return tickets;
+			author: Api.currentUser
 		});
 
+		modalNotes.set([...notes, newNote]);
 		input = '';
 	}
 </script>

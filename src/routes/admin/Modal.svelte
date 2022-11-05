@@ -1,22 +1,31 @@
 <script lang="ts">
 	import moment from 'moment';
-	import { modalTicket, ticketColumns } from '$lib/stores';
+	import { modalNotes, modalTicket, ticketColumns } from '$lib/stores';
 	import Button from '$lib/Button.svelte';
 	import NoteForm from './NoteForm.svelte';
 	import Avatar from '$lib/Avatar.svelte';
 	import Api from '$lib/api';
+	import { onMount } from 'svelte';
 
 	export let ticket: ITicket;
 
 	const descriptionBreakPoint = 200;
 
+	const currentUser = Api.currentUser;
+
 	let showFullDescription = false;
 
-	const getInitials = (name?: string) =>
-		(name ?? '')
-			.split(' ')
-			.map((name) => name[0])
-			.join('');
+	let notes: INote[] = [];
+
+	onMount(async () => {
+		const [_, ticketNotes] = await Api.getSingleTicket(ticket.id);
+		notes = ticketNotes;
+		modalNotes.set(ticketNotes);
+	})
+
+	modalNotes.subscribe((newNotes) => {
+		notes = newNotes;
+	})
 
 	const getAbsoluteDate = (date: string) => moment(date).format('D.M.YYYY');
 	const getRelativeDate = (date: string) => moment(date).fromNow();
@@ -30,7 +39,7 @@
 	const assignMe = async () => {
 		const newTicket = await Api.updateTicket({
 			id: ticket.id,
-			assigned_to: 'Hackathon Demo',
+			assigned_to: Api.currentUser,
 			status: 'assigned'
 		});
 
@@ -159,7 +168,7 @@
 				{ticket.reporter_email ?? 'Not given'}
 			</p>
 			<p class="text-black/60">Reporter estimate</p>
-			<p class="text-black/70 font-medium">{ticket.reporter_estimate ?? 'Not given'}</p>
+			<p class="text-black/70 font-medium">{`${ticket.reporter_estimate}/5` ?? 'Not given'}</p>
 			<p class="text-black/60">Description</p>
 		</div>
 
@@ -178,8 +187,7 @@
 		<hr class="my-4" />
 
 		<p class="text-black/70 font-medium uppercase text-sm pb-2">Notes</p>
-
-		{#each ticket.notes as note}
+		{#each notes as note}
 			<div class="flex flex-col gap-4 pb-4">
 				<div class="flex items-center gap-2">
 					<Avatar name={note.author} />
@@ -196,14 +204,14 @@
 			</div>
 		{/each}
 
-		{#if !ticket.notes.length}
+		{#if !notes.length}
 			<div
 				class="my-4 w-full rounded-xl border border-slate-200 p-3 flex items-center justify-center text-black/50 border-dashed"
 			>
 				No notes
 			</div>
 		{/if}
-		<NoteForm {ticket}/>
+		<NoteForm {ticket} {notes}/>
 
 		<hr class="my-4" />
 
@@ -212,13 +220,13 @@
 		{/if}
 
 
-		{#if ticket.assigned_to !== 'Hackathon Demo'}
+		{#if ticket.assigned_to !== currentUser}
       <p class="text-black/50">You cannot mark someone else's ticket as completed!</p>
     {/if}
 
 		<div class="flex items-center justify-between gap-4">
       {#if ticket.status !== 'completed'}
-        <Button on:click={markCompleted} disabled={!ticket.assigned_to || ticket.assigned_to !== 'Hackathon Demo'}>Mark as completed</Button>
+        <Button on:click={markCompleted} disabled={!ticket.assigned_to || ticket.assigned_to !== currentUser}>Mark as completed</Button>
       {:else}
         <span></span>
       {/if}

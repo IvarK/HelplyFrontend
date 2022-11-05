@@ -78,6 +78,7 @@
 		<label class="text-primary" for="description">Why does your friend need help?</label>
 		<textarea
 			placeholder="My friend..."
+			maxlength="500"
 			rows="10"
 			bind:value={description}
 			class="rounded-xl bg-slate-100 py-2 px-4"
