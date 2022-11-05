@@ -29,7 +29,6 @@
 		ticket.description.length > descriptionBreakPoint
 			? ticket.description.slice(0, descriptionBreakPoint) + '...'
 			: ticket.description;
-	$: assigneeInitials = getInitials(ticket.assigned_to);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -59,7 +58,7 @@
 					<div
 						class="text-sm w-10 h-10 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
 					>
-						{assigneeInitials}
+						{getInitials(ticket.assigned_to)}
 					</div>
 					<div class="flex flex-col">
 						<p class="text-sm text-black/50">Assigned to</p>
@@ -73,7 +72,7 @@
 					</div>
 				{/if}
 			</div>
-			{#if ticket.reporter}
+			{#if ticket.assigned_to}
 				<Button variant="secondary">Unassign</Button>
 			{:else}
 				<Button variant="secondary">Assign me</Button>

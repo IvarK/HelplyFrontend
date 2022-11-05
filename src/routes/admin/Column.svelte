@@ -1,6 +1,4 @@
 <script lang="ts">
-	import {dndzone} from "svelte-dnd-action";
-
 	import { modalTicket, ticketColumns } from '$lib/stores';
 	import Ticket from './Ticket.svelte';
 	export let category: TColumn;

@@ -10,14 +10,13 @@
 	const currentUser = 'Ivar Kerajärvi';
 
 	const ticketSeverityValues: { [K in Severity]: number } = {
-		'low': 1,
-		'medium': 2,
-		'high': 3
+		low: 1,
+		medium: 2,
+		high: 3
 	};
 
 	onMount(async () => {
 		const tickets = await Api.getTickets();
-
 
 		tickets.sort((a, b) => {
 			if (!b.severity) return -1;
@@ -29,10 +28,10 @@
 		ticketColumns.set({
 			New: tickets.filter((ticket) => ticket.status === 'new'),
 			Mine: tickets.filter(
-				(ticket) => ticket.status === 'assigned' && ticket.reporter === currentUser
+				(ticket) => ticket.status === 'assigned' && ticket.assigned_to === currentUser
 			),
 			'Assigned to others': tickets.filter(
-				(ticket) => ticket.status === 'assigned' && ticket.reporter !== currentUser
+				(ticket) => ticket.status === 'assigned' && ticket.assigned_to !== currentUser
 			),
 			Completed: tickets.filter((ticket) => ticket.status === 'completed')
 		});
