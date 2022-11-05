@@ -58,7 +58,7 @@
 		</div>
 		<div class="pt-10 mt-10 relative">
 			<div
-				class="-z-10 opacity-50 bg-slate-50 border-t border-slate-200 absolute top-0 bottom-0 -left-[100vw] -right-[100vw]"
+				class="-z-10 opacity-50 bg-slate-50 border-t border-slate-200 absolute inset-0 scale-x-[400%]"
 			/>
 			<Board {visibleColumns} />
 		</div>
