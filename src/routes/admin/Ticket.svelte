@@ -2,7 +2,7 @@
 	import moment from 'moment';
 	export let ticket: ITicket;
 
-	$: date = moment(ticket.created_at).format('DD.MM.YYYY');
+	$: dateString = moment(ticket.created_at).fromNow();
 	$: assigneeInitials =
 		ticket.reporter
 			?.split(' ')
@@ -10,7 +10,9 @@
 			.join('') ?? '';
 </script>
 
-<div class="w-full rounded-xl border border-slate-200 bg-white p-3 flex flex-col gap-2">
+<button
+	class="w-full rounded-xl border border-slate-200 bg-white p-3 flex flex-col gap-2 duration-100 hover:scale-[103%] active:scale-[98%] active:opacity-70 focus:outline outline-primary"
+>
 	<div class="flex items-center gap-3">
 		<div
 			data-severity={ticket.severity}
@@ -20,10 +22,23 @@
 			>{ticket.severity ?? 'unclassified'}</span
 		>
 	</div>
-	<h2>{ticket.name}</h2>
-	<span>{date} {ticket.status}</span>
-	<div class="assignee">
-		<div class="assignee-avatar">{assigneeInitials}</div>
-		<div>{ticket.reporter ?? 'Unassigned'}</div>
+	<h3 class="text-lg font-medium">{ticket.name}</h3>
+	<div class="flex items-center gap-2">
+		<span class="uppercase text-xs text-black/50 font-medium">{dateString}</span>
+		<span class="uppercase text-xs text-black/50 font-medium">·</span>
+		<span class="uppercase text-xs text-black/50 font-medium">{ticket.status}</span>
 	</div>
-</div>
+	<div class="flex items-center gap-2 pt-2">
+		{#if ticket.reporter}
+			<div
+				class="text-sm w-7 h-7 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
+			>
+				{assigneeInitials}
+			</div>
+			<p class="text-sm text-black/80 font-medium">{ticket.reporter}</p>
+		{:else}
+			<div class="w-7 h-7 bg-slate-100 rounded-full" />
+			<p class="text-sm text-black/50 font-medium">Unassigned</p>
+		{/if}
+	</div>
+</button>
