@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/Button.svelte';
 	import { goto } from '$app/navigation';
+	import Api from '$lib/api';
 
 	let friendName = '';
 	let friendEmail = '';
@@ -10,18 +11,20 @@
 	let myEmail = '';
 
 	async function handleSubmit() {
-		const data = {
-			friendName,
-			friendEmail,
-			urgency,
+		const data: ITicket = {
+			name: friendName,
+			email: friendEmail,
+			reporter_estimate: urgency,
 			description,
-			myName,
-			myEmail
+			reporter: myName,
+			reporter_email: myEmail,
+			created_at: new Date().toISOString(),
+			status: 'new',
+			severity: 'low',
+			notes: []
 		};
 
-		console.log(data);
-
-		const res = await fetch('/');
+		const res = await Api.addTicket(data);
 
 		goto('/thank-you');
 	}
