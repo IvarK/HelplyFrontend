@@ -25,6 +25,8 @@
 			tickets[index] = newTicket;
 			return tickets;
 		});
+
+		input = '';
 	}
 </script>
 

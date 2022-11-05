@@ -13,6 +13,12 @@
           "author": "Ivar Kerajärvi",
           "text": "The patient said that he is not buying anything and hung up. Might have mistaken me for an Elisa salesperson. Will try again tomorrow.",
           "created_at": "2022-11-05T15:13:56Z"
+        },
+        {
+          "text": "Tried tomorrow, he said it wasn't the right time.",
+          "author": "Hackathon Demo",
+          "created_at": "2022-11-05T14:42:17.973Z",
+          "id": "note_id_11"
         }
       ],
       "severity": "medium",
