@@ -1,4 +1,5 @@
 <script lang="ts">
+	import sortTickets from '$lib/sort';
 	import { modalTicket, ticketColumns } from '$lib/stores';
 	import Ticket from './Ticket.svelte';
 	export let category: TColumn;
@@ -6,7 +7,7 @@
 	let tickets: ITicket[] = [];
 
 	ticketColumns.subscribe((columns) => {
-		tickets = columns[category];
+		tickets = sortTickets(columns[category]);
 	});
 
 	function showModal(ticket: ITicket): void {
