@@ -1,3 +1,9 @@
+<script>
+	import Board from "./Board.svelte";
+
+
+</script>
+
 <div>
   <div class="breadcrumbs">
     <a href="/#">Admin</a>
@@ -17,6 +23,8 @@
     </div>
 
     <button class="button">Settings</button>
+
+    <Board />
   </div>
 
 </div>
