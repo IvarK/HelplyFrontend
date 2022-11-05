@@ -68,6 +68,10 @@
 				</button>
 			{/each}
 		</div>
+		<div class="flex items-center justify-between">
+			<span class="opacity-50">In a few weeks</span>
+			<span class="opacity-50">Immediately</span>
+		</div>
 	</div>
 	<div class="flex flex-col gap-4">
 		<label class="text-primary" for="description">Why does your friend need help?</label>
