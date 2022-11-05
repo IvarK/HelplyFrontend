@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Api from '$lib/api';
+	import sortTickets from '$lib/sort';
 	import { modalTicket, ticketColumns } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import Column from './Column.svelte';
@@ -9,31 +10,20 @@
 
 	const currentUser = 'Hackathon Demo';
 
-	const ticketSeverityValues: { [K in Severity]: number } = {
-		low: 1,
-		medium: 2,
-		high: 3
-	};
-
 	onMount(async () => {
 		const tickets = await Api.getTickets();
 
-		tickets.sort((a, b) => {
-			if (!b.severity) return -1;
-			if (!a.severity) return 1;
-
-			return ticketSeverityValues[b.severity] - ticketSeverityValues[a.severity];
-		});
+		const sortedTickets = sortTickets(tickets);
 
 		ticketColumns.set({
-			New: tickets.filter((ticket) => ticket.status === 'new'),
-			Mine: tickets.filter(
+			New: sortedTickets.filter((ticket) => ticket.status === 'new'),
+			Mine: sortedTickets.filter(
 				(ticket) => ticket.status === 'assigned' && ticket.assigned_to === currentUser
 			),
-			'Assigned to others': tickets.filter(
+			'Assigned to others': sortedTickets.filter(
 				(ticket) => ticket.status === 'assigned' && ticket.assigned_to !== currentUser
 			),
-			Completed: tickets.filter((ticket) => ticket.status === 'completed')
+			Completed: sortedTickets.filter((ticket) => ticket.status === 'completed')
 		});
 	});
 
