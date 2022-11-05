@@ -11,7 +11,9 @@
 	--color-bg-1: hsl(209, 36%, 86%);
 	--color-bg-2: hsl(224, 44%, 95%);
 	--color-theme-1: #FA006E;
-	--color-theme-2: #BE2C60;
+	--color-theme-1--hover: #BE2C60;
+	--color-theme-2: #FDE5ED;
+	--color-theme-2--hover: #E9CFD9;
 	--color-text: black;
 	--column-width: 42rem;
 	--column-margin-top: 4rem;	
@@ -102,5 +104,21 @@ button:focus:not(:focus-visible) {
 }
 
 .cto:hover {
+	background: var(--color-theme-1--hover);
+}
+
+.button {
 	background: var(--color-theme-2);
+	color: black;
+	border: none;
+	border-radius: var(--border-radius);
+	padding: 0 1em;
+	cursor: pointer;
+	transition-duration: 0.3s;	
+	font-weight: 600;
+	height: 3em;
+}
+
+.button:hover {
+	background: var(--color-theme-2--hover);
 }

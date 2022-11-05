@@ -1,6 +1,6 @@
 <script>
 	import Header from './Header.svelte';
-	import './styles.css';
+	import '../(app)/styles.css';
 </script>
 
 <div class="app">
@@ -26,7 +26,7 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
+		padding: 1rem 0;
 		width: 100%;
 		max-width: 50%;
 		margin: 0 auto;

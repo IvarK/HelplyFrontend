@@ -1,6 +1,4 @@
 <script>
-	import { page } from '$app/stores';
-	import github from '$lib/images/github.svg';
 	import aalto from '$lib/images/aalto.png';
 </script>
 
@@ -21,7 +19,7 @@
 				<a href="/#">about</a>
 			</li>
 			<li>
-				<a href="/#">pricing</a>
+				<a href="/#">for organizations</a>
 			</li>
 		</ul>
 
