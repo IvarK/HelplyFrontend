@@ -24,3 +24,6 @@ interface ITicket {
   notes: INote[];
   severity?: Severity;
 }
+
+
+type TColumn = "New" | "Mine" | "Assigned to others" | "Completed";

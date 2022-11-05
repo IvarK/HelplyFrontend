@@ -5,6 +5,8 @@
 	import Column from "./Column.svelte";
 	import Modal from "./Modal.svelte";
 
+  export let visibleColumns: TColumn[];
+
   let tickets: ITicket[] = [];
 
   const currentUser = "Ivar Kerajärvi";
@@ -20,16 +22,19 @@
     console.log("asd")
   });
 
-  $: newTickets = tickets.filter((ticket) => ticket.status === "new");
-  $: mineTickets = tickets.filter((ticket) => ticket.status === "assigned" && ticket.reporter === currentUser);
-  $: othersTickets = tickets.filter((ticket) => ticket.status === "assigned" && ticket.reporter !== currentUser);
+  $: filteredTickets = {
+    "New": tickets.filter((ticket) => ticket.status === "new"),
+    "Mine": tickets.filter((ticket) => ticket.status === "assigned" && ticket.reporter === currentUser),
+    "Assigned to others": tickets.filter((ticket) => ticket.status === "assigned" && ticket.reporter !== currentUser),
+    "Completed": tickets.filter((ticket) => ticket.status === "completed")
+  };
 </script>
 
 <div>
   <div class="colums">
-    <Column category="New" tickets={newTickets}/>
-    <Column category="Mine" tickets={mineTickets}/>
-    <Column category="Assigned to others" tickets={othersTickets}/>
+    {#each visibleColumns as column}
+      <Column category={column} tickets={filteredTickets[column]}/>
+    {/each}
   </div>
 
   {#if currentTicket}
