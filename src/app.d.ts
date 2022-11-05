@@ -8,9 +8,10 @@ type TicketStatus = 'new' | 'assigned' | 'completed';
 type Severity = 'high' | 'medium' | 'low';
 
 interface INote {
-  author: string;
-  text: string;
-  created_at: string;
+	id: string;
+	author: string;
+	text: string;
+	created_at: string;
 }
 interface ITicket {
   id: number;

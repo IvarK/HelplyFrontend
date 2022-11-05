@@ -1,106 +1,166 @@
 <script lang="ts">
-  import moment from 'moment';
-	import { modalTicket } from "$lib/stores";
-	import { each } from 'svelte/internal';
+	import moment from 'moment';
+	import { modalTicket } from '$lib/stores';
+	import Button from '$lib/Button.svelte';
+	import NoteForm from './NoteForm.svelte';
 
-  export let ticket: ITicket;
+	export let ticket: ITicket;
 
-  const descriptionBreakPoint = 200;
+	const descriptionBreakPoint = 200;
 
-  let showFullDescription = false;
+	let showFullDescription = false;
 
-  const noteAuthorInitials = (author: string) => {
-    return author
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-  };
+	const getInitials = (name?: string) =>
+		(name ?? '')
+			.split(' ')
+			.map((name) => name[0])
+			.join('');
 
-  const closeModal = (e: MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      modalTicket.set(null);
-    }
-  };
+	const getAbsoluteDate = (date: string) => moment(date).format('D.M.YYYY');
+	const getRelativeDate = (date: string) => moment(date).fromNow();
 
-  $: shortDescription = 
-    ticket.description.length > descriptionBreakPoint
-      ? ticket.description.slice(0, descriptionBreakPoint) + "..."
-      : ticket.description;
+	const closeModal = (e: MouseEvent) => {
+		if (e.target === e.currentTarget) {
+			modalTicket.set(null);
+		}
+	};
 
-  $: date = moment(ticket.created_at).format('DD.MM.YYYY');
-  $: assigneeInitials = ticket.reporter
-    ?.split(' ')
-    .map((name) => name[0])
-    .join('') ?? '';
+	$: shortDescription =
+		ticket.description.length > descriptionBreakPoint
+			? ticket.description.slice(0, descriptionBreakPoint) + '...'
+			: ticket.description;
+	$: assigneeInitials = getInitials(ticket.assigned_to);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="modal-bg" on:click={closeModal}>
-  <div class="modal"> 
-    <div>x</div>
-    <div class={`severity-blob--${ticket.severity}`} />
-    <div>{ticket.severity}</div>
-    <h1>{ticket.name}</h1>
-    <div class="divider"></div>
-    <div class="modal-top">
-      <div class="gridlmao">
-        <div>Email</div><div>{ticket.email}</div>
-        <div>Created</div><div>{date}</div>
-        <div>Status</div><div>{ticket.status}</div>
-        <div>Reporter</div><div>{ticket.reporter_email ?? "Anonymous"}</div>
-        <div>Reporter email</div><div>{ticket.email ?? "Not given"}</div>
-        <div>Reporter estimate</div><div>{ticket.reporter_estimate}</div>
-      </div>
-      <div class="assignee-container">
-        <div class="assignee-information">
-          <div class="assignee-avatar">{assigneeInitials}</div>
-          <div>Assigned to <br>{ticket.reporter ?? "Unassigned"}</div>
-        </div>
-        <button>Unassign</button>
-      </div>
-    </div>
-    <p>Description:</p>
-    <p>
-      {showFullDescription ? ticket.description : shortDescription}
-    </p>
-    {#if ticket.description.length > descriptionBreakPoint}
-      <button on:click={() => showFullDescription = !showFullDescription}>
-        {showFullDescription ? "Read less" : "Read more"}
-      </button>
-    {/if}
-    <h2>Notes</h2>
-    {#each ticket.notes as note}
-    <div class="note">
-      <div class="note-author">
-        <div class="assignee-avatar">{noteAuthorInitials(note.author)}</div>
-        <div>{note.author}</div>
-        <p>{note.text}</p>
-      </div>
-    </div>
-    {/each}
-    <button>Add note</button>
-    <div class="divider"></div>
-    <div class="modal-bottom">
-      <button>Mark as completed</button>
-      <button on:click={() => modalTicket.set(null)}>close</button>
-    </div>
-  </div>
+<div
+	class="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center"
+	on:click={closeModal}
+>
+	<div
+		class="w-full px-6 py-4 bg-white rounded-xl border-slate-200 shadow absolute max-w-2xl max-h-[90vh] flex flex-col gap-2 overflow-y-auto"
+	>
+		<div class="flex items-center gap-3">
+			<div
+				data-severity={ticket.severity}
+				class="w-3 h-3 rounded-full bg-slate-200 data-[severity=low]:bg-sky-400 data-[severity=medium]:bg-amber-400 data-[severity=high]:bg-rose-500"
+			/>
+			<span class="uppercase text-xs text-black/50 font-medium"
+				>{ticket.severity ?? 'Unclassified'} priority</span
+			>
+		</div>
+
+		<h2 class="text-xl font-semibold">{ticket.name}</h2>
+		<hr class="my-4" />
+
+		<div class="flex justify-between">
+			<div class="flex items-center gap-2 pt-2">
+				{#if ticket.assigned_to}
+					<div
+						class="text-sm w-10 h-10 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
+					>
+						{assigneeInitials}
+					</div>
+					<div class="flex flex-col">
+						<p class="text-sm text-black/50">Assigned to</p>
+						<p class="text-sm text-black/80 font-medium">{ticket.assigned_to}</p>
+					</div>
+				{:else}
+					<div class="w-10 h-10 bg-slate-100 rounded-full" />
+					<div class="flex flex-col">
+						<p class="text-sm text-black/50">Assigned to</p>
+						<p class="text-sm text-black/50 font-medium">Unassigned</p>
+					</div>
+				{/if}
+			</div>
+			{#if ticket.reporter}
+				<Button variant="secondary">Unassign</Button>
+			{:else}
+				<Button variant="secondary">Assign me</Button>
+			{/if}
+		</div>
+
+		<hr class="my-4" />
+
+		<p class="text-black/70 font-medium uppercase text-sm pb-2">Details</p>
+
+		<div class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1">
+			<p class="text-black/60">Email</p>
+			<p class="text-black/70 font-medium underline">{ticket.email}</p>
+			<p class="text-black/60">Created</p>
+			<p class="text-black/70 font-medium">
+				{getAbsoluteDate(ticket.created_at)}
+				<span class="font-normal text-black/60 pl-2 capitalize"
+					>({getRelativeDate(ticket.created_at)})</span
+				>
+			</p>
+			<p class="text-black/60">Status</p>
+			<p class="text-black/70 font-medium capitalize">{ticket.status}</p>
+			<p class="text-black/60">Reporter</p>
+			<p class="text-black/70 font-medium">{ticket.reporter ?? 'Anonymous'}</p>
+			<p class="text-black/60">Reporter email</p>
+			<p
+				class="text-black/70 font-medium data-[enabled=true]:underline"
+				data-enabled={!!ticket.reporter_email}
+			>
+				{ticket.reporter_email ?? 'Not given'}
+			</p>
+			<p class="text-black/60">Reporter estimate</p>
+			<p class="text-black/70 font-medium">{ticket.reporter_estimate ?? 'Not given'}</p>
+			<p class="text-black/60">Description</p>
+		</div>
+
+		<p class="text-black/60 pl-4 border-l-2 border-l-slate-200">
+			{showFullDescription ? ticket.description : shortDescription}
+			{#if ticket.description.length > descriptionBreakPoint}
+				<button
+					class="text-sm uppercase font-medium px-2 inline"
+					on:click={() => (showFullDescription = !showFullDescription)}
+				>
+					{showFullDescription ? 'Show less' : 'Show more'}
+				</button>
+			{/if}
+		</p>
+
+		<hr class="my-4" />
+
+		<p class="text-black/70 font-medium uppercase text-sm pb-2">Notes</p>
+
+		{#each ticket.notes as note}
+			<div class="flex flex-col gap-4 pb-4">
+				<div class="flex items-center gap-2">
+					<div
+						class="text-sm w-10 h-10 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
+					>
+						{getInitials(note.author)}
+					</div>
+					<div class="flex flex-col">
+						<p class="text-sm text-black/70 font-medium">{note.author}</p>
+						<p class="text-sm text-black/60 capitalize">
+							{getAbsoluteDate(note.created_at)} ({getRelativeDate(note.created_at)})
+						</p>
+					</div>
+				</div>
+				<p class="text-black/60 pl-4 border-l-2 border-l-slate-200">
+					{note.text}
+				</p>
+			</div>
+		{/each}
+
+		{#if !ticket.notes.length}
+			<div
+				class="my-4 w-full rounded-xl border border-slate-200 p-3 flex items-center justify-center text-black/50 border-dashed"
+			>
+				No notes
+			</div>
+		{/if}
+		<NoteForm />
+
+		<hr class="my-4" />
+
+		<div class="flex items-center justify-between gap-4">
+			<Button>Mark as completed</Button>
+			<button on:click={() => modalTicket.set(null)}>Close</button>
+		</div>
+	</div>
 </div>
-
-<style>
-  .modal-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal {
-    background: white;
-  }
-</style>
