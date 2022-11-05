@@ -30,7 +30,7 @@
 		<h1 class="text-3xl font-semibold">Aalto University Admin Dashboard</h1>
 
 		<div class="flex items-center justify-between">
-			<div class="bg-secondary/30 rounded-xl p-2 flex items-center gap-4">
+			<div class="border border-slate-100 rounded-2xl p-1 flex items-center gap-4">
 				<button
 					aria-selected={visibleColumns.includes('New')}
 					class="duration-[50ms] aria-selected:bg-secondary font-medium px-4 py-2 rounded-xl"
@@ -56,10 +56,10 @@
 			</div>
 			<Button variant="secondary">Settings</Button>
 		</div>
-		<div
-			class="-z-10 bg-slate-50 fixed top-[284px] left-0 right-0 h-[200vh] border-t border-slate-100"
-		/>
-		<div class="pt-10">
+		<div class="pt-10 mt-10 relative">
+			<div
+				class="-z-10 opacity-50 bg-slate-50 border-t border-slate-200 absolute top-0 bottom-0 -left-[100vw] -right-[100vw]"
+			/>
 			<Board {visibleColumns} />
 		</div>
 	</div>
