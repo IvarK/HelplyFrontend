@@ -61,6 +61,24 @@
 		});
 	};
 
+  const markCompleted = async () => {
+    if (!ticket.assigned_to) return;
+
+    const newTicket = await Api.updateTicket({
+      id: ticket.id,
+      status: 'completed'
+    });
+
+    modalTicket.set(newTicket);
+    ticketColumns.update((columns) => {
+      const newColumns = { ...columns };
+      const newTickets = newColumns['Mine'].filter((t) => t.id !== newTicket.id);
+      newColumns['Mine'] = newTickets;
+      newColumns['Completed'] = [...newColumns['Completed'], newTicket];
+      return newColumns;
+    });
+  };
+
 	$: shortDescription =
 		ticket.description.length > descriptionBreakPoint
 			? ticket.description.slice(0, descriptionBreakPoint) + '...'
