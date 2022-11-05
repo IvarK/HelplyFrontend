@@ -1,15 +1,9 @@
 <script lang="ts">
+	import Avatar from '$lib/Avatar.svelte';
 	import moment from 'moment';
 	export let ticket: ITicket;
 
-	const getInitials = (name: string) =>
-		name
-			.split(' ')
-			.map((name) => name[0])
-			.join('');
-
 	$: dateString = moment(ticket.created_at).fromNow();
-	$: assigneeInitials = getInitials(ticket.assigned_to ?? '');
 </script>
 
 <button
@@ -32,11 +26,7 @@
 	</div>
 	<div class="flex items-center gap-2 pt-2">
 		{#if ticket.assigned_to}
-			<div
-				class="text-sm w-7 h-7 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
-			>
-				{assigneeInitials}
-			</div>
+			<Avatar name={ticket.assigned_to} size="small" />
 			<p class="text-sm text-black/80 font-medium">{ticket.assigned_to}</p>
 		{:else}
 			<div class="w-7 h-7 bg-slate-100 rounded-full" />
