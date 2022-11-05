@@ -19,7 +19,6 @@
 
 	modalTicket.subscribe((ticket) => {
 		currentTicket = ticket;
-		console.log('asd');
 	});
 
 	$: filteredTickets = {
