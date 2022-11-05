@@ -1,6 +1,6 @@
 const ticketSeverityValues: { [K in Severity]: number } = {
   low: 1,
-  medium: 2,
+  moderate: 2,
   high: 3
 };
 

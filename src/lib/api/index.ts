@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = 'http://localhost:8000';
+const apiUrl = 'http://34.88.56.134:8000/';
 
 const Api = {
   currentUser: "Hackathon Demo",

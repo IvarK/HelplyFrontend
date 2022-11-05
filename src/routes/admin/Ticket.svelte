@@ -12,7 +12,7 @@
 	<div class="flex items-center gap-3">
 		<div
 			data-severity={ticket.severity}
-			class="w-3 h-3 rounded-full bg-slate-200 data-[severity=low]:bg-sky-400 data-[severity=medium]:bg-amber-400 data-[severity=high]:bg-rose-500"
+			class="w-3 h-3 rounded-full bg-slate-200 data-[severity=low]:bg-sky-400 data-[severity=moderate]:bg-amber-400 data-[severity=high]:bg-rose-500"
 		/>
 		<span class="uppercase text-xs text-black/50 font-medium"
 			>{ticket.severity ?? 'unclassified'}</span

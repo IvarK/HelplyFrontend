@@ -5,7 +5,7 @@ declare namespace App {}
 
 type TicketStatus = 'new' | 'assigned' | 'completed';
 
-type Severity = 'high' | 'medium' | 'low';
+type Severity = 'high' | 'moderate' | 'low';
 
 interface INote {
 	id: number;
