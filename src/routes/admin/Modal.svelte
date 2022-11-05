@@ -16,7 +16,7 @@
       .join('');
   };
 
-  const closeModal = (e: PointerEvent) => {
+  const closeModal = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {
       modalTicket.set(null);
     }
@@ -34,6 +34,7 @@
     .join('') ?? '';
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="modal-bg" on:click={closeModal}>
   <div class="modal"> 
     <div>x</div>

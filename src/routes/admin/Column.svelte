@@ -7,7 +7,6 @@
 
 	function showModal(ticket: ITicket): void {
 		modalTicket.set(ticket);
-		console.log('asdfgfd');
 	}
 </script>
 
@@ -18,6 +17,7 @@
 	</div>
 	{#if tickets.length > 0}
 		{#each tickets as ticket}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => showModal(ticket)}>
 				<Ticket {ticket} />
 			</div>
