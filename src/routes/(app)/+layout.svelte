@@ -3,51 +3,16 @@
 	import './styles.css';
 </script>
 
-<div class="app">
+<main class="min-h-screen mx-auto w-[90%] max-w-6xl">
 	<Header />
 
-	<main>
-		<slot />
-	</main>
+	<slot />
 
-	<footer>
-		<p>Made by Vertics gang lmao modern technologies go brrrr</p>
+	<footer class="flex flex-col items-center justify-center py-8">
+		<p class="opacity-50">Powered by TypeScript, Rust, SvelteKit, TailwindCSS & Vite</p>
+		<p class="opacity-50">
+			Made by <a href="https://vertics.co" class="underline decoration-primary">Vertics gang</a> lmao
+			modern technologies go brrrr
+		</p>
 	</footer>
-</div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem 0;
-		width: 100%;
-		max-width: 50%;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+</main>

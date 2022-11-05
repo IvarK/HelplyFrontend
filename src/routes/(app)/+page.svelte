@@ -1,81 +1,27 @@
 <script>
+	import Button from '$lib/Button.svelte';
 	import hands from '$lib/images/hands.png';
+	import './styles.css';
 </script>
 
 <svelte:head>
 	<title>Helply - Home</title>
 </svelte:head>
 
-<section>
-	<div class="hero">
-		<div class="hero-text">
-			<h1>Are you worried about your friend?</h1>
-			<div class="divider"/>
-			<p>
-				Help a friend and send a call for help. We will reach out
-				to your and ensure he gets the professional help he needs
-				in order to turn his life around.
-			</p>
-			<button class="cto">I'm worried about a friend</button>
-		</div>
-		<div class="hero-image">
-			<img src={hands} alt="Hero">
-			<div class="img-background"/>
-		</div>
+<section class="flex items-start justify-between py-24">
+	<div class="flex flex-col items-start gap-8">
+		<h1 class="text-6xl font-semibold max-w-xl text-left">Are you worried about your friend?</h1>
+		<div class="h-[2px] w-48 bg-primary" />
+		<p class="max-w-xl">
+			Help a friend and send a call for help. We will reach out to your and ensure he gets the
+			professional help he needs in order to turn his life around.
+		</p>
+		<a data-sveltekit-prefetch href="/help-your-friend">
+			<Button>I'm worried about a friend</Button>
+		</a>
+	</div>
+	<div class="relative">
+		<img src={hands} alt="" class="-translate-x-4 -translate-y-4 rounded-xl" />
+		<div class="absolute inset-0 bg-primary -z-10 rounded-xl" />
 	</div>
 </section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	.hero {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin: auto;
-	}
-
-	.divider {
-		width: 180px;
-		height: 2px;
-		background-color: var(--color-theme-1);
-		margin: 20px 0;
-	}
-
-	h1 {
-		text-align: start;
-		font-weight: bold;
-		font-size: 4em;
-	}
-
-	p {
-		width: 430px;
-	}
-
-	.hero-image {
-		position: relative;
-		margin-left: 100px;
-	}
-
-	.hero-image img {
-		position: relative;
-		z-index: 1;
-	}
-
-	.img-background {
-		position: absolute;
-		top: 15px;
-		left: 15px;
-		width: 100%;
-		height: 100%;
-		background-color: var(--color-theme-1);
-		border-radius: var(--border-radius);
-		z-index: 0;
-	}
-</style>
