@@ -11,8 +11,21 @@
 
 	const currentUser = 'Ivar Kerajärvi';
 
+	const ticketSeverityValues: { [K in Severity]: number } = {
+		'low': 1,
+		'medium': 2,
+		'high': 3
+	};
+
 	onMount(async () => {
 		tickets = await Api.getTickets();
+
+		tickets.sort((a, b) => {
+			if (!b.severity) return -1;
+			if (!a.severity) return 1;
+
+			return ticketSeverityValues[b.severity] - ticketSeverityValues[a.severity];
+		});
 	});
 
 	let currentTicket: ITicket | null = null;
