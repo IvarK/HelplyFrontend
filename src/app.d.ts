@@ -23,6 +23,7 @@ interface ITicket {
   description: string;
   notes: INote[];
   severity?: Severity;
+  reporter_estimate: number;
 }
 
 
