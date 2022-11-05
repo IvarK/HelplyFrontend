@@ -1,16 +1,22 @@
 <script lang="ts">
-	import { modalTicket } from '$lib/stores';
-	import Ticket from './Ticket.svelte';
+	import {dndzone} from "svelte-dnd-action";
 
-	export let category: string;
-	export let tickets: ITicket[];
+	import { modalTicket, ticketColumns } from '$lib/stores';
+	import Ticket from './Ticket.svelte';
+	export let category: TColumn;
+
+	let tickets: ITicket[] = [];
+
+	ticketColumns.subscribe((columns) => {
+		tickets = columns[category];
+	});
 
 	function showModal(ticket: ITicket): void {
 		modalTicket.set(ticket);
 	}
 </script>
 
-<div class="flex flex-col gap-4 items-stretch">
+<div class="flex flex-col gap-4 items-stretch" data-column={category}>
 	<div class="flex items-center gap-4">
 		<h3 class="uppercase font-medium text-sm">{category}</h3>
 		<p class="text-sm opacity-60">{tickets.length}</p>

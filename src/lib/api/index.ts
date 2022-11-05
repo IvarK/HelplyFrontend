@@ -8,8 +8,13 @@ const Api = {
     return response.data;
   },
 
-  addTicket: async (ticket: ITicket): Promise<ITicket> => {
+  addTicket: async (ticket: ITicketBody): Promise<ITicket> => {
     const response = await axios.post(`${apiUrl}/tickets`, ticket);
+    return response.data;
+  },
+
+  updateTicket: async (ticket: Partial<ITicket>): Promise<ITicket> => {
+    const response = await axios.patch(`${apiUrl}/tickets/${ticket.id}`, ticket);
     return response.data;
   }
 }

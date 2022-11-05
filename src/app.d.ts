@@ -13,6 +13,7 @@ interface INote {
   created_at: string;
 }
 interface ITicket {
+  id: number;
   email: string;
   name: string;
   created_at: string;
@@ -23,6 +24,18 @@ interface ITicket {
   description: string;
   notes: INote[];
   severity?: Severity;
+  reporter_estimate: number;
+}
+
+interface ITicketBody {
+  email: string;
+  name: string;
+  created_at: string;
+  status: TicketStatus;
+  assigned_to?: string;
+  reporter?: string;
+  reporter_email?: string;
+  description: string;
   reporter_estimate: number;
 }
 

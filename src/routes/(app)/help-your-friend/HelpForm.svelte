@@ -11,7 +11,7 @@
 	let myEmail = '';
 
 	async function handleSubmit() {
-		const data: ITicket = {
+		const data: ITicketBody = {
 			name: friendName,
 			email: friendEmail,
 			reporter_estimate: urgency,
@@ -20,8 +20,6 @@
 			reporter_email: myEmail,
 			created_at: new Date().toISOString(),
 			status: 'new',
-			severity: 'low',
-			notes: []
 		};
 
 		const res = await Api.addTicket(data);
