@@ -19,8 +19,7 @@ export const ticketColumns = writable<{
 
 storeTickets.subscribe((tickets) => {
   const sortedTickets = sortTickets(tickets);
-  
-  console.log(Api.currentUser)
+
   ticketColumns.set({
     New: sortedTickets.filter((ticket) => ticket.status === 'new'),
     Mine: sortedTickets.filter(

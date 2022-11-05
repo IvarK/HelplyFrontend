@@ -5,4 +5,3 @@
 		Copilot ❤️ lmao modern technologies go brrrr ✨
 	</p>
 </footer>
-🚀

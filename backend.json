@@ -5,7 +5,7 @@
       "email": "hansenfeng69@gmail.com",
       "name": "Hansen Feng",
       "created_at": "2019-01-01T00:00:00Z",
-      "status": "assigned",
+      "status": "new",
       "description": "He bought a rope and a chair from Clas Ohlson. I am really worried about him because he is my best friend, can you please help him find help? He is in a really bad place right now. I'm trying to generate more text in this with github copilot, but he stopped giving more suggestions.",
       "notes": [
         {
@@ -22,7 +22,7 @@
         }
       ],
       "severity": "medium",
-      "assigned_to": "Hackathon Demo"
+      "assigned_to": null
     },
     {
       "id": 2,
@@ -61,10 +61,11 @@
       "reporter": "Jaska jokunen",
       "reporter_email": "jasks@vertics.co",
       "created_at": "2022-11-05T12:19:16.394Z",
-      "status": "new",
+      "status": "completed",
       "severity": "low",
       "notes": [],
-      "id": 4
+      "id": 4,
+      "assigned_to": "Hackathon Demo"
     }
   ]
 }

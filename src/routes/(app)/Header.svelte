@@ -24,8 +24,20 @@
 			</li>
 		</ul>
 
+		<a data-sveltekit-prefetch href="/admin" class="fixed-floating">
+			<Button variant="secondary">Open employee view</Button>
+		</a>
+
 		<a data-sveltekit-prefetch href="/help-your-friend">
 			<Button>I'm worried about a friend</Button>
 		</a>
 	</nav>
 </header>
+
+<style>
+	.fixed-floating {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
+	}
+</style>
