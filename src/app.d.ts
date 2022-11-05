@@ -19,7 +19,7 @@ interface ITicket {
   name: string;
   created_at: string;
   status: TicketStatus;
-  assigned_to?: string;
+  assigned_to?: string | null;
   reporter?: string;
   reporter_email?: string;
   description: string;
@@ -28,17 +28,7 @@ interface ITicket {
   reporter_estimate: number;
 }
 
-interface ITicketBody {
-  email: string;
-  name: string;
-  created_at: string;
-  status: TicketStatus;
-  assigned_to?: string;
-  reporter?: string;
-  reporter_email?: string;
-  description: string;
-  reporter_estimate: number;
-}
+type ITicketBody = Omit<ITicket, 'id' | 'notes'>;
 
 
 type TColumn = "New" | "Mine" | "Assigned to others" | "Completed";

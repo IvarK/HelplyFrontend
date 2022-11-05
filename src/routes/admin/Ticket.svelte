@@ -2,14 +2,14 @@
 	import moment from 'moment';
 	export let ticket: ITicket;
 
-	const getInitials = (name?: string) =>
-		(name ?? '')
+	const getInitials = (name: string) =>
+		name
 			.split(' ')
 			.map((name) => name[0])
 			.join('');
 
 	$: dateString = moment(ticket.created_at).fromNow();
-	$: assigneeInitials = getInitials(ticket.assigned_to);
+	$: assigneeInitials = getInitials(ticket.assigned_to ?? '');
 </script>
 
 <button

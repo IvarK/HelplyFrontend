@@ -7,7 +7,7 @@
 
 	export let visibleColumns: TColumn[];
 
-	const currentUser = 'Ivar Kerajärvi';
+	const currentUser = 'Hackathon Demo';
 
 	const ticketSeverityValues: { [K in Severity]: number } = {
 		low: 1,
