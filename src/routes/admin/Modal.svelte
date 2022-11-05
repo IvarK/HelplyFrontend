@@ -123,9 +123,13 @@
 				{/if}
 			</div>
 			{#if ticket.assigned_to}
-				<Button variant="secondary" on:click={unassign}>Unassign</Button>
+				<Button variant="secondary" on:click={unassign} disabled={ticket.status === 'completed'}
+					>Unassign</Button
+				>
 			{:else}
-				<Button variant="secondary" on:click={assignMe}>Assign me</Button>
+				<Button variant="secondary" on:click={assignMe} disabled={ticket.status === 'completed'}
+					>Assign me</Button
+				>
 			{/if}
 		</div>
 
@@ -203,8 +207,12 @@
 
 		<hr class="my-4" />
 
+		{#if !ticket.assigned_to}
+			<p class="text-black/50">The ticket must be assigned before it can be completed.</p>
+		{/if}
+
 		<div class="flex items-center justify-between gap-4">
-			<Button>Mark as completed</Button>
+			<Button disabled={!ticket.assigned_to}>Mark as completed</Button>
 			<button on:click={() => modalTicket.set(null)}>Close</button>
 		</div>
 	</div>

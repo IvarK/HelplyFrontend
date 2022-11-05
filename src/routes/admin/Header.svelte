@@ -20,8 +20,6 @@
 			</li>
 		</ul>
 
-		<a data-sveltekit-prefetch href="/help-your-friend">
-			<Button variant="secondary">Sign out</Button>
-		</a>
+		<Button variant="secondary">Sign out</Button>
 	</nav>
 </header>
