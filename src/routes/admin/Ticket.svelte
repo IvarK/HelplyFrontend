@@ -2,12 +2,14 @@
 	import moment from 'moment';
 	export let ticket: ITicket;
 
-	$: dateString = moment(ticket.created_at).fromNow();
-	$: assigneeInitials =
-		ticket.reporter
-			?.split(' ')
+	const getInitials = (name?: string) =>
+		(name ?? '')
+			.split(' ')
 			.map((name) => name[0])
-			.join('') ?? '';
+			.join('');
+
+	$: dateString = moment(ticket.created_at).fromNow();
+	$: assigneeInitials = getInitials(ticket.assigned_to);
 </script>
 
 <button
@@ -16,7 +18,7 @@
 	<div class="flex items-center gap-3">
 		<div
 			data-severity={ticket.severity}
-			class="w-3 h-3 rounded-full data-[severity=low]:bg-sky-400 data-[severity=medium]:bg-amber-400 data-[severity=high]:bg-rose-500"
+			class="w-3 h-3 rounded-full bg-slate-200 data-[severity=low]:bg-sky-400 data-[severity=medium]:bg-amber-400 data-[severity=high]:bg-rose-500"
 		/>
 		<span class="uppercase text-xs text-black/50 font-medium"
 			>{ticket.severity ?? 'unclassified'}</span
@@ -29,13 +31,13 @@
 		<span class="uppercase text-xs text-black/50 font-medium">{ticket.status}</span>
 	</div>
 	<div class="flex items-center gap-2 pt-2">
-		{#if ticket.reporter}
+		{#if ticket.assigned_to}
 			<div
 				class="text-sm w-7 h-7 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
 			>
 				{assigneeInitials}
 			</div>
-			<p class="text-sm text-black/80 font-medium">{ticket.reporter}</p>
+			<p class="text-sm text-black/80 font-medium">{ticket.assigned_to}</p>
 		{:else}
 			<div class="w-7 h-7 bg-slate-100 rounded-full" />
 			<p class="text-sm text-black/50 font-medium">Unassigned</p>

@@ -1,48 +1,55 @@
 {
-  "tickets": [
-    {
-      "id": 1,
-      "email": "hansenfeng69@gmail.com",
-      "name": "Hansen Feng",
-      "created_at": "2019-01-01T00:00:00Z",
-      "status": "new",
-      "description": "He bought a rope and a chair from Clas Ohlson. I am really worried about him because he is my best friend, can you please help him find help? He is in a really bad place right now. I'm trying to generate more text in this with github copilot, but he stopped giving more suggestions.",
-      "notes": [],
-      "severity": "medium"
-    },
-    {
-      "id": 2,
-      "email": "jussi@nevavuori.com",
-      "name": "Jussi Nevavuori",
-      "created_at": "2020-01-01T00:00:00Z",
-      "status": "assigned",
-      "reporter": "Ivar Kerajärvi",
-      "description": "He insists on using React over Vue",
-      "notes": [],
-      "severity": "high"
-    },
-    {
-      "id": 3,
-      "email": "ivark@hotmale.com",
-      "name": "Ivar Kerajärvi",
-      "created_at": "2019-01-01T00:00:00Z",
-      "status": "new",
-      "description": "Does not eat mayonnaise",
-      "notes": [],
-      "severity": "high"
-    },
-    {
-      "name": "Jussus",
-      "email": "jussus@vertics.co",
-      "reporter_estimate": 4,
-      "description": "I think jussus is not doing fine because he is coding rust, and a little bit rusted, haha get it rusted lmao ayy gottem haha.",
-      "reporter": "Jaska jokunen",
-      "reporter_email": "jasks@vertics.co",
-      "created_at": "2022-11-05T12:19:16.394Z",
-      "status": "new",
-      "severity": "low",
-      "notes": [],
-      "id": 4
-    }
-  ]
+	"tickets": [
+		{
+			"id": 1,
+			"email": "hansenfeng69@gmail.com",
+			"name": "Hansen Feng",
+			"created_at": "2019-01-01T00:00:00Z",
+			"status": "new",
+			"description": "He bought a rope and a chair from Clas Ohlson. I am really worried about him because he is my best friend, can you please help him find help? He is in a really bad place right now. I'm trying to generate more text in this with github copilot, but he stopped giving more suggestions.",
+			"notes": [
+				{
+					"id": "note_id_1",
+					"author": "Ivar Kerajärvi",
+					"text": "The patient said that he is not buying anything and hung up. Might have mistaken me for an Elisa salesperson. Will try again tomorrow.",
+					"created_at": "2022-11-05T15:13:56Z"
+				}
+			],
+			"severity": "medium"
+		},
+		{
+			"id": 2,
+			"email": "jussi@nevavuori.com",
+			"name": "Jussi Nevavuori",
+			"created_at": "2020-01-01T00:00:00Z",
+			"status": "assigned",
+			"reporter": "Ivar Kerajärvi",
+			"description": "He insists on using React over Vue",
+			"notes": [],
+			"severity": "high"
+		},
+		{
+			"id": 3,
+			"email": "ivark@hotmale.com",
+			"name": "Ivar Kerajärvi",
+			"created_at": "2019-01-01T00:00:00Z",
+			"status": "new",
+			"description": "Does not eat mayonnaise",
+			"notes": [],
+			"severity": "high"
+		},
+		{
+			"name": "Jussus",
+			"email": "jussus@vertics.co",
+			"reporter_estimate": 4,
+			"description": "I think jussus is not doing fine because he is coding rust, and a little bit rusted, haha get it rusted lmao ayy gottem haha.",
+			"reporter": "Jaska jokunen",
+			"reporter_email": "jasks@vertics.co",
+			"created_at": "2022-11-05T12:19:16.394Z",
+			"status": "new",
+			"severity": "low",
+			"notes": [],
+			"id": 4
+		}
+	]
 }
