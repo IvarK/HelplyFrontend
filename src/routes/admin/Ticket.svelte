@@ -31,14 +31,14 @@
 	<div class="flex items-center gap-2 pt-2">
 		{#if ticket.reporter}
 			<div
-				class="text-sm w-8 h-8 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
+				class="text-sm w-7 h-7 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
 			>
 				{assigneeInitials}
 			</div>
-			<p class="uppercase text-sm text-black/50 font-medium">{ticket.reporter}</p>
+			<p class="text-sm text-black/80 font-medium">{ticket.reporter}</p>
 		{:else}
-			<div class="w-8 h-8 bg-slate-100 rounded-full" />
-			<p class="uppercase text-sm text-black/50 font-medium">{'Unassigned'}</p>
+			<div class="w-7 h-7 bg-slate-100 rounded-full" />
+			<p class="text-sm text-black/50 font-medium">Unassigned</p>
 		{/if}
 	</div>
 </button>

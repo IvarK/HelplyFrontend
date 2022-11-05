@@ -14,7 +14,7 @@
 	<nav class="flex items-center gap-8">
 		<ul class="flex items-center gap-6">
 			<li>
-				<a href="/#">demouser@junction.com</a>
+				<span>demouser@junction.com</span>
 			</li>
 		</ul>
 

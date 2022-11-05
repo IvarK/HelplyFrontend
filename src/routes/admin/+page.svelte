@@ -57,7 +57,7 @@
 			<Button variant="secondary">Settings</Button>
 		</div>
 		<div
-			class="-z-10 bg-slate-50 fixed top-[288px] left-0 right-0 h-[200vh] border-t border-slate-100"
+			class="-z-10 bg-slate-50 fixed top-[284px] left-0 right-0 h-[200vh] border-t border-slate-100"
 		/>
 		<div class="pt-10">
 			<Board {visibleColumns} />
