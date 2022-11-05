@@ -1,7 +1,6 @@
 <script>
 	import Button from '$lib/Button.svelte';
 	import hands from '$lib/images/hands.png';
-	import './styles.css';
 </script>
 
 <svelte:head>
