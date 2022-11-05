@@ -1,4 +1,5 @@
 <script>
+	import Avatar from '$lib/Avatar.svelte';
 	import Button from '$lib/Button.svelte';
 	import aalto from '$lib/images/aalto.png';
 </script>
@@ -13,8 +14,9 @@
 	</div>
 	<nav class="flex items-center gap-8">
 		<ul class="flex items-center gap-6">
-			<li>
-				<span>demouser@junction.com</span>
+			<li class="flex items-center gap-4">
+				<Avatar name="Hackathon Demo" />
+				<span>Hackathon Demo</span>
 			</li>
 		</ul>
 

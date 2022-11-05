@@ -3,6 +3,7 @@
 	import { modalTicket } from '$lib/stores';
 	import Button from '$lib/Button.svelte';
 	import NoteForm from './NoteForm.svelte';
+	import Avatar from '$lib/Avatar.svelte';
 
 	export let ticket: ITicket;
 
@@ -55,11 +56,7 @@
 		<div class="flex justify-between">
 			<div class="flex items-center gap-2 pt-2">
 				{#if ticket.assigned_to}
-					<div
-						class="text-sm w-10 h-10 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
-					>
-						{getInitials(ticket.assigned_to)}
-					</div>
+					<Avatar name={ticket.assigned_to} />
 					<div class="flex flex-col">
 						<p class="text-sm text-black/50">Assigned to</p>
 						<p class="text-sm text-black/80 font-medium">{ticket.assigned_to}</p>
@@ -128,11 +125,7 @@
 		{#each ticket.notes as note}
 			<div class="flex flex-col gap-4 pb-4">
 				<div class="flex items-center gap-2">
-					<div
-						class="text-sm w-10 h-10 text-black/70 font-medium bg-secondary rounded-full flex items-center justify-center"
-					>
-						{getInitials(note.author)}
-					</div>
+					<Avatar name={note.author} />
 					<div class="flex flex-col">
 						<p class="text-sm text-black/70 font-medium">{note.author}</p>
 						<p class="text-sm text-black/60 capitalize">
