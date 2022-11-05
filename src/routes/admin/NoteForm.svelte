@@ -1,8 +1,30 @@
 <script lang="ts">
+	import Api from "$lib/api";
+	import { modalTicket, storeTickets, ticketColumns } from "$lib/stores";
+
+
 	let input = '';
 
+	export let ticket: ITicket;
+
 	async function handleSubmit() {
-		const res = await fetch('/');
+		const notes = ticket.notes
+		const topId = notes.length > 0 ? notes[notes.length - 1].id + 1 : 1;
+		notes.push({
+			text: input, 
+			author: 'Hackathon Demo',
+			created_at: new Date().toISOString(), 
+			id: topId
+		});
+		const newTicket = {...ticket, notes }
+		const res = await Api.updateTicket(newTicket);
+		modalTicket.set(newTicket);
+
+		storeTickets.update((tickets) => {
+			const index = tickets.findIndex((t) => t.id === newTicket.id);
+			tickets[index] = newTicket;
+			return tickets;
+		});
 	}
 </script>
 

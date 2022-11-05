@@ -8,7 +8,7 @@ type TicketStatus = 'new' | 'assigned' | 'completed';
 type Severity = 'high' | 'medium' | 'low';
 
 interface INote {
-	id: string;
+	id: number;
 	author: string;
 	text: string;
 	created_at: string;

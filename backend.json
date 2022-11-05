@@ -26,7 +26,14 @@
       "status": "new",
       "assigned_to": null,
       "description": "He insists on using React over Vue",
-      "notes": [],
+      "notes": [
+        {
+          "text": "Didn't answer my calls",
+          "author": "Hackathon Demo",
+          "created_at": "2022-11-05T14:32:10.268Z",
+          "id": 1
+        }
+      ],
       "severity": "high"
     },
     {
