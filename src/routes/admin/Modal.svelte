@@ -1,9 +1,10 @@
 <script lang="ts">
 	import moment from 'moment';
-	import { modalTicket } from '$lib/stores';
+	import { modalTicket, ticketColumns } from '$lib/stores';
 	import Button from '$lib/Button.svelte';
 	import NoteForm from './NoteForm.svelte';
 	import Avatar from '$lib/Avatar.svelte';
+	import Api from '$lib/api';
 
 	export let ticket: ITicket;
 
@@ -24,6 +25,40 @@
 		if (e.target === e.currentTarget) {
 			modalTicket.set(null);
 		}
+	};
+
+	const assignMe = async () => {
+		const newTicket = await Api.updateTicket({
+			id: ticket.id,
+			assigned_to: 'Hackathon Demo',
+			status: 'assigned'
+		});
+
+		modalTicket.set(newTicket);
+		ticketColumns.update((columns) => {
+			const newColumns = { ...columns };
+			const newTickets = newColumns['New'].filter((t) => t.id !== newTicket.id);
+			newColumns['New'] = newTickets;
+			newColumns['Mine'] = [...newColumns['Mine'], newTicket];
+			return newColumns;
+		});
+	};
+
+	const unassign = async () => {
+		const newTicket = await Api.updateTicket({
+			id: ticket.id,
+			assigned_to: null,
+			status: 'new'
+		});
+
+		modalTicket.set(newTicket);
+		ticketColumns.update((columns) => {
+			const newColumns = { ...columns };
+			const newTickets = newColumns['Mine'].filter((t) => t.id !== newTicket.id);
+			newColumns['Mine'] = newTickets;
+			newColumns['New'] = [...newColumns['New'], newTicket];
+			return newColumns;
+		});
 	};
 
 	$: shortDescription =
@@ -70,9 +105,9 @@
 				{/if}
 			</div>
 			{#if ticket.assigned_to}
-				<Button variant="secondary">Unassign</Button>
+				<Button variant="secondary" on:click={unassign}>Unassign</Button>
 			{:else}
-				<Button variant="secondary">Assign me</Button>
+				<Button variant="secondary" on:click={assignMe}>Assign me</Button>
 			{/if}
 		</div>
 

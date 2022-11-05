@@ -1,6 +1,15 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
+
 	export let variant: 'primary' | 'secondary' = 'primary';
 	export let type: 'button' | 'submit' = 'button';
+
+
+	const dispatch = createEventDispatcher();
+
+	const dispatchClick = () => {
+		dispatch('click');
+	};
 
 	$: variantClassName = {
 		primary: 'bg-primary text-white',
@@ -13,6 +22,6 @@
 	].join(' ');
 </script>
 
-<button class={className} {type}>
+<button class={className} {type} on:click={dispatchClick}>
 	<slot />
 </button>
