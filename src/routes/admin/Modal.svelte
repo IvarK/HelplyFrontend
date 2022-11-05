@@ -61,6 +61,24 @@
 		});
 	};
 
+  const markCompleted = async () => {
+    if (!ticket.assigned_to) return;
+
+    const newTicket = await Api.updateTicket({
+      id: ticket.id,
+      status: 'completed'
+    });
+
+    modalTicket.set(newTicket);
+    ticketColumns.update((columns) => {
+      const newColumns = { ...columns };
+      const newTickets = newColumns['Mine'].filter((t) => t.id !== newTicket.id);
+      newColumns['Mine'] = newTickets;
+      newColumns['Completed'] = [...newColumns['Completed'], newTicket];
+      return newColumns;
+    });
+  };
+
 	$: shortDescription =
 		ticket.description.length > descriptionBreakPoint
 			? ticket.description.slice(0, descriptionBreakPoint) + '...'
@@ -185,7 +203,7 @@
 				No notes
 			</div>
 		{/if}
-		<NoteForm />
+		<NoteForm {ticket}/>
 
 		<hr class="my-4" />
 
@@ -193,8 +211,18 @@
 			<p class="text-black/50">The ticket must be assigned before it can be completed.</p>
 		{/if}
 
+
+		{#if ticket.assigned_to !== 'Hackathon Demo'}
+      <p class="text-black/50">You cannot mark someone else's ticket as completed!</p>
+    {/if}
+
 		<div class="flex items-center justify-between gap-4">
-			<Button disabled={!ticket.assigned_to}>Mark as completed</Button>
+      {#if ticket.status !== 'completed'}
+        <Button on:click={markCompleted} disabled={!ticket.assigned_to || ticket.assigned_to !== 'Hackathon Demo'}>Mark as completed</Button>
+      {:else}
+        <span></span>
+      {/if}
+      
 			<button on:click={() => modalTicket.set(null)}>Close</button>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
       "email": "hansenfeng69@gmail.com",
       "name": "Hansen Feng",
       "created_at": "2019-01-01T00:00:00Z",
-      "status": "new",
+      "status": "assigned",
       "description": "He bought a rope and a chair from Clas Ohlson. I am really worried about him because he is my best friend, can you please help him find help? He is in a really bad place right now. I'm trying to generate more text in this with github copilot, but he stopped giving more suggestions.",
       "notes": [
         {
@@ -15,7 +15,8 @@
           "created_at": "2022-11-05T15:13:56Z"
         }
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "assigned_to": "Hackathon Demo"
     },
     {
       "id": 2,
@@ -25,7 +26,14 @@
       "status": "new",
       "assigned_to": null,
       "description": "He insists on using React over Vue",
-      "notes": [],
+      "notes": [
+        {
+          "text": "Didn't answer my calls",
+          "author": "Hackathon Demo",
+          "created_at": "2022-11-05T14:32:10.268Z",
+          "id": 1
+        }
+      ],
       "severity": "high"
     },
     {
@@ -33,8 +41,8 @@
       "email": "ivark@hotmale.com",
       "name": "Ivar Kerajärvi",
       "created_at": "2019-01-01T00:00:00Z",
-      "assigned_to": null,
-      "status": "new",
+      "assigned_to": "Someone Else",
+      "status": "assigned",
       "description": "Does not eat mayonnaise",
       "notes": [],
       "severity": "high"
@@ -47,11 +55,10 @@
       "reporter": "Jaska jokunen",
       "reporter_email": "jasks@vertics.co",
       "created_at": "2022-11-05T12:19:16.394Z",
-      "status": "assigned",
+      "status": "new",
       "severity": "low",
       "notes": [],
-      "id": 4,
-      "assigned_to": "Hackathon Demo"
+      "id": 4
     }
   ]
 }
