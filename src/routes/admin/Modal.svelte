@@ -105,9 +105,13 @@
 				{/if}
 			</div>
 			{#if ticket.assigned_to}
-				<Button variant="secondary" on:click={unassign}>Unassign</Button>
+				<Button variant="secondary" on:click={unassign} disabled={ticket.status === 'completed'}
+					>Unassign</Button
+				>
 			{:else}
-				<Button variant="secondary" on:click={assignMe}>Assign me</Button>
+				<Button variant="secondary" on:click={assignMe} disabled={ticket.status === 'completed'}
+					>Assign me</Button
+				>
 			{/if}
 		</div>
 
